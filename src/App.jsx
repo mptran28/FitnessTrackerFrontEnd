@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-  return <div className="App">Stranger's Things</div>;
+  return <div className="App">Fitness Tracker</div>;
 }
 
 export default App;
