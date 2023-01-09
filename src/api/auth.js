@@ -39,17 +39,78 @@ export const fetchMe = async (token) => {
 
 export const createNewRoutine = async (
     token,
-    id,
-    creatorId,
     isPublic,
     name,
     goal
 ) => {
-    const response = await (`${baseUrl}/routines`, {
-        method: "POST",
+    try {
+        const response = await (`${baseUrl}/routines`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                isPublic,
+                name,
+                goal,
+            }),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const createNewActivity = async (
+    token,
+    name,
+    description
+) => {
+    try {
+        const response = await fetch (`${baseUrl}/routines`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                name,
+                description,
+            }),
+        })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getAllRoutines = async () => {
+    try {
+       const response = await fetch(`${baseUrl}/routines`, {
         headers: {
-            "Content-Type":"application/json",
-            Authorization:`Bearer ${token}`,
-        }
-    })
+            "Content-Type": "application/json"
+        },
+       })
+       const data = await response.json();
+       return data;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getAllActivities = async () => {
+    try {
+        const response = await fetch(`${baseUrl}/activities`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
 }
