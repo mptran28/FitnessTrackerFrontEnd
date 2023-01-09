@@ -39,3 +39,20 @@
 .read-the-docs {
   color: #888;
 }
+
+form {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+input {
+ height: 5vh;
+ font-size: 20px;
+}
+
+label {
+  font-size: 20px;
+  padding: 10px;
+}
