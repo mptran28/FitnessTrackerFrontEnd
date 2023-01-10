@@ -1,8 +1,12 @@
-// import React from "react";
-// import "./Home.css";
+import React from "react";
+import "./Home.css";
 
-// const Home = ({token, setUser}) => {
+const Home = () => {
+  return (
+    <div>
+      <h1>THIS IS HOME</h1>
+    </div>
+  );
+};
 
-// }
-
-// export default Home;
+export default Home;
