@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { registerUser } from "../api/auth";
 
-const Register = ({ token, setToken, user, setUser }) => {
+const Register = ({ token, setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

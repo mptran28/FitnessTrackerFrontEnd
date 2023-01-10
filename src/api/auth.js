@@ -1,27 +1,25 @@
 const baseUrl = "http://fitnesstrac-kr.herokuapp.com/api";
 
 export const registerUser = async (username, password) => {
-  try {
-    const response = await fetch(`${baseUrl}/users/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: {
+    try {
+      const response = await fetch(`${baseUrl}/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           username,
           password,
-        },
-      }),
-    });
-    const token = (await response.json()).token;
-    console.log(response);
-    console.log("THIS IS TOKEN", token);
-    return token;
-  } catch (error) {
-    console.error(error);
-  }
-};
+        }),
+      });
+      // console.log(response);
+      const token = (await response.json()).token;
+      console.log("THIS IS TOKEN", token);
+      return token;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 export const fetchMe = async (token) => {
   try {
@@ -37,6 +35,25 @@ export const fetchMe = async (token) => {
     console.error(error);
   }
 };
+
+export const userLogin = async (username, password) => {
+    try {
+        const response = await fetch (`${baseUrl}/users/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            })
+        });
+        const token = await response.json();
+        return token;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export const createNewRoutine = async (token, isPublic, name, goal) => {
   try {
@@ -79,6 +96,17 @@ export const createNewActivity = async (token, name, description) => {
     console.error(error);
   }
 };
+
+// export const getRoutines = async (setUser) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/routines`);
+//     console.log("GETROUTINE RESPONSE", response)
+//     const data = await response.json();
+//     setUser(data.routines)
+//   } catch (error) {
+    
+//   }
+// }
 
 export const getAllRoutines = async () => {
   try {

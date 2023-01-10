@@ -1,29 +1,40 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const NavBar = () => {
+const NavBar = ({token, setToken}) => {
+    
+  const logout = () => {
+      localStorage.removeItem("token");
+      setToken("");
+    }
+
   return (
     <>
       <nav>
-        <NavLink className="navlink" to="/">
+        <Link className="navlink" to="/">
           Home
-        </NavLink>
-        <NavLink className="navlink" to="/activities">
-          Activities
-        </NavLink>
-        <NavLink className="navlink" to="/routines">
+        </Link>
+        <Link className="navlink" to="/routines">
           Routines
-        </NavLink>
-        <NavLink className="navlink" to="/register">
-          Register
-        </NavLink>
-        <NavLink className="navlink" to="/login">
-          Login
-        </NavLink>
-        <NavLink className="navlink" to="/my_routines">
+        </Link>
+        <Link className="navlink" to="/my_routines">
           My Routines
-        </NavLink>
+        </Link>
+        <Link className="navlink" to="/activities">
+          Activities
+        </Link>
+        {!token ? (
+        <Link className="navlink" to="/login">
+          Sign Up/Sign In
+        </Link> ) 
+        :
+        (
+        <Link className="navlink" to={'/login'} onClickCapture={logout}>
+          Logout
+        </Link>
+          )
+        }
       </nav>
     </>
   );
