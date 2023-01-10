@@ -1,17 +1,21 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { createNewRoutine } from "../api/auth";
 
-const NewRoutine = () => {
+const NewRoutine = ({routines, setRoutines}) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
-
+  const [isPublic, setIsPublic] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
       <form
         onSubmit={async (event) => {
           try {
             event.preventDefault();
-            const newRoutine = await createNewRoutine(name, goal);
+            const newRoutine = await createNewRoutine({isPublic, name, goal});
+            setRoutines([newRoutine, ...routines]);
+            navigate('/routines')
           } catch (error) {
             console.error(error);
           }
@@ -34,7 +38,15 @@ const NewRoutine = () => {
           placeholder="goal"
           onChange={(event) => setGoal(event.target.value)}
         ></input>
+        <label htmlFor="willDeliver">Is Public</label>
+          <input
+          value={isPublic}
+          type="checkbox"
+          onChange={() => setIsPublic((prev) => !prev)}
+          ></input>
+        <Link to= "/routines">
         <button type="submit">Create Routine</button>
+        </Link>
       </form>
     </div>
   );

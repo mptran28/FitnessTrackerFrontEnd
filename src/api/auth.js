@@ -30,7 +30,6 @@ export const fetchMe = async (token) => {
       },
     });
     const data = await response.json();
-    console.log("THIS IS DATA", data);
     return data;
   } catch (error) {
     console.error(error);
@@ -56,9 +55,10 @@ export const userLogin = async (username, password) => {
   }
 };
 
-export const createNewRoutine = async (token, isPublic, name, goal) => {
+export const createNewRoutine = async ({isPublic, name, goal}) => {
   try {
-    const response = await (`${baseUrl}/routines`,
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${baseUrl}/routines`,
     {
       method: "POST",
       headers: {
@@ -98,16 +98,17 @@ export const createNewActivity = async (token, name, description) => {
   }
 };
 
-// export const getRoutines = async (setUser) => {
-//   try {
-//     const response = await fetch(`${baseUrl}/routines`);
-//     console.log("GETROUTINE RESPONSE", response)
-//     const data = await response.json();
-//     setUser(data.routines)
-//   } catch (error) {
-
-//   }
-// }
+export const getRoutines = async (setRoutines) => {
+  try {
+    const response = await fetch(`${baseUrl}/routines`);
+    console.log("GETROUTINE RESPONSE", response)
+    const data = await response.json();
+    setRoutines(data.routines)
+    console.log("SET THE DATA", data)
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const getAllRoutines = async () => {
   try {

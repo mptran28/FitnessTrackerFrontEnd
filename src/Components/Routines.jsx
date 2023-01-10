@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { createNewActivity } from "../api/auth";
+import React from "react";
 import "./Routines.css";
 
 const Routines = ({ routines }) => {

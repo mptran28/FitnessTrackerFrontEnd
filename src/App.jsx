@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllActivities, getAllRoutines, fetchMe } from "./api/auth";
+import { getAllActivities, getAllRoutines, getRoutines, fetchMe } from "./api/auth";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
@@ -17,18 +17,14 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
-    const getMe = async () => {
-      const data = await fetchMe(token);
-      setUser(data);
-    };
     if (token) {
+      const getMe = async () => {
+        const data = await fetchMe(token);
+        setUser(data);
+      };
       getMe();
     }
   }, [token]);
-
-  // useEffect(() => {
-  //   getRoutines(setUser);
-  // }, [updated]);
 
   useEffect(() => {
     const getActivities = async () => {
@@ -67,7 +63,7 @@ function App() {
             path="/routines"
             element={<Routines routines={routines} setRoutines={setRoutines} />}
           />
-          <Route path="/my_routines" element={<My_Routines token={token} />} />
+          <Route path="/my_routines" element={<My_Routines token={token} user={user} routines={routines} setRoutines = {setRoutines} />} />
           <Route
             path="/register"
             element={<Register token={token} setToken={setToken} />}
