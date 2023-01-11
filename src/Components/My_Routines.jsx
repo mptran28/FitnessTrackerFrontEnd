@@ -2,7 +2,6 @@ import React from "react";
 import NewRoutine from "./NewRoutine";
 
 const My_Routines = ({ token, user, routines, setRoutines }) => {
-
     console.log(user);
 
   let routinesToMap = routines.map((routine, index) => {
