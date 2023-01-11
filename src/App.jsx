@@ -34,7 +34,6 @@ function App() {
   useEffect(() => {
     const getActivities = async () => {
       const response = await getAllActivities();
-      console.log("activities", response);
       setActivities(response);
     };
     getActivities();
@@ -43,7 +42,6 @@ function App() {
   useEffect(() => {
     const getRoutines = async () => {
       const response = await getAllRoutines();
-      console.log("routines", response);
       setRoutines(response);
     };
     getRoutines();

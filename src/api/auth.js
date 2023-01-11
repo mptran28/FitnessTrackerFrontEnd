@@ -14,7 +14,6 @@ export const registerUser = async (username, password) => {
         password,
       }),
     });
-    // console.log(response);
     const token = (await response.json()).token;
     console.log("THIS IS TOKEN", token);
     return token;
@@ -192,8 +191,9 @@ export const getUserRoutines = async (username) => {
 };
 
 export const updateRoutine = async (routineId, name, goal, isPublic) => {
+  console.log("updatateRoutine", routineId)
   try {
-    const response = await fetch(`${baseUrl}/routines${routineId}`, {
+    const response = await fetch(`${baseUrl}/routines/${routineId}`, {
       method: "PATCH",
       body: JSON.stringify({
         name,
