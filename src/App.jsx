@@ -13,6 +13,7 @@ import Register from "./Components/Register";
 import Routines from "./Components/Routines";
 import Activities from "./Components/Activities";
 import My_Routines from "./Components/My_Routines";
+import SingleRoutine from "./Components/SingleRoutine";
 import "./App.css";
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
           <Route
             path="/routines"
             element={<Routines routines={routines} setRoutines={setRoutines} />}
+          />
+          <Route
+            path="/routines/:id"
+            element={<SingleRoutine routines={routines} />}
           />
           <Route
             path="/my_routines"

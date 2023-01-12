@@ -66,7 +66,6 @@ export const getAllActivities = async () => {
       },
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -191,7 +190,10 @@ export const getUserRoutines = async (username) => {
 };
 
 export const updateRoutine = async (routineId, name, goal, isPublic) => {
-  console.log("updatateRoutine", routineId)
+  console.log("this is name", name);
+  console.log("this is goal", goal);
+  console.log("this is isPublic", isPublic);
+
   try {
     const response = await fetch(`${baseUrl}/routines/${routineId}`, {
       method: "PATCH",
@@ -202,6 +204,7 @@ export const updateRoutine = async (routineId, name, goal, isPublic) => {
       }),
     });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
