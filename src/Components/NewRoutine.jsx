@@ -7,6 +7,7 @@ const NewRoutine = ({ routines, setRoutines }) => {
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const navigate = useNavigate();
+  
   return (
     <div>
       <form
@@ -30,7 +31,7 @@ const NewRoutine = ({ routines, setRoutines }) => {
           placeholder="name"
           onChange={(event) => setName(event.target.value)}
         ></input>
-        <label htmlFor="description">Goal</label>
+        <label htmlFor="goal">Goal</label>
         <input
           value={goal}
           type="text"
@@ -38,7 +39,7 @@ const NewRoutine = ({ routines, setRoutines }) => {
           placeholder="goal"
           onChange={(event) => setGoal(event.target.value)}
         ></input>
-        <label htmlFor="willDeliver">Is Public</label>
+        <label htmlFor="isPublic">Is Public</label>
         <input
           value={isPublic}
           type="checkbox"

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import EditRoutine from "./EditRoutine";
 import AddActivities from "./AddActivities";
 
-const SingleRoutine = ({ routines }) => {
+const SingleRoutine = ({ routines, setRoutines }) => {
   const [editRoutine, setEditRoutine] = useState(false);
   const [addActivity, setAddActivity] = useState(false);
   const { id } = useParams();
@@ -39,7 +39,7 @@ const SingleRoutine = ({ routines }) => {
           </button>
         )}
         {editRoutine ? (
-          <EditRoutine token={token} routine={routine} />
+          <EditRoutine token={token} routine={routine} routines={routines} setRoutines={setRoutines}  />
         ) : (
           <button
             onClick={() => {

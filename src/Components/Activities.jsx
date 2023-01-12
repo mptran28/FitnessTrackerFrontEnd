@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Activities.css";
+import NewActivity from "./NewActivity";
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, setActivities }) => {
   //   console.log(activities);
   let activitiesToMap = activities.map((activity, index) => {
     return (
@@ -13,6 +14,7 @@ const Activities = ({ activities }) => {
   });
   return (
     <>
+      <NewActivity activities={activities} setActivities={setActivities}/>
       <h1>Activities</h1>
       <div>{activitiesToMap}</div>
     </>

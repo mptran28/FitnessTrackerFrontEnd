@@ -72,6 +72,7 @@ function App() {
             element={
               <SingleRoutine
                 routines={routines}
+                setRoutines={setRoutines}
                 activities={activities}
                 setActivities={setActivities}
               />

@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { updateRoutine } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
-const EditRoutine = ({ routine }) => {
+const EditRoutine = ({ routine, routines, setRoutines }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const navigate = useNavigate();
   const routineId = routine.id;
-  console.log(
-    "Don't forget to ask about hard refresh EditRoutine and why private routines aren't saving!"
-  );
+ 
   return (
     <div>
       <form
@@ -23,7 +21,12 @@ const EditRoutine = ({ routine }) => {
               goal,
               isPublic
             );
-            return newRoutine;
+            const routinesToFilter = routines.filter((routine) => {
+              return routineId !== routine.id;
+            })
+            console.log("filterRoutine: ", routinesToFilter)
+            setRoutines ([newRoutine, ...routinesToFilter]);
+            navigate('/my_routines');
           } catch (error) {
             console.error(error);
           }

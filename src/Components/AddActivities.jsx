@@ -5,8 +5,7 @@ import { attachActivityToRoutine, getAllActivities } from "../api/auth";
 const AddActivities = ({ routine }) => {
   const routineId = routine.id;
   const [activities, setActivities] = useState([]);
-  const [activity, setActivity] = useState({});
-  //   const [acts, setActs] = useState([]);
+  const [activity, setActivity] = useState([]);
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const navigate = useNavigate;
@@ -19,7 +18,7 @@ const AddActivities = ({ routine }) => {
     getActivities();
   }, []);
 
-  let activitiesToMap = activities.map((a, index) => {
+  let activitiesToMap = activities?.map((a, index) => {
     return (
       <option value={activity} key={index}>
         {a.name}
