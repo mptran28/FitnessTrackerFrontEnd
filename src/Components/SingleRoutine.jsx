@@ -28,20 +28,18 @@ const SingleRoutine = ({ routines }) => {
         <h2>{routine.name}</h2>
         <h2>{routine.goal}</h2>
         {addActivity ? (
-          <AddActivities 
-            routine ={routine}
-          />
+          <AddActivities routine={routine} />
         ) : (
           <button
-           onClick={() => {
-           setAddActivity(!addActivity)
-           }}>Activities</button>
+            onClick={() => {
+              setAddActivity(!addActivity);
+            }}
+          >
+            Activities
+          </button>
         )}
         {editRoutine ? (
-          <EditRoutine
-            token={token}
-            routine={routine}
-          />
+          <EditRoutine token={token} routine={routine} />
         ) : (
           <button
             onClick={() => {

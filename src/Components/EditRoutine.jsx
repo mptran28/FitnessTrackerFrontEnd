@@ -8,7 +8,9 @@ const EditRoutine = ({ routine }) => {
   const [isPublic, setIsPublic] = useState(false);
   const navigate = useNavigate();
   const routineId = routine.id;
-  console.log("EditRoutine", routine);
+  console.log(
+    "Don't forget to ask about hard refresh EditRoutine and why private routines aren't saving!"
+  );
   return (
     <div>
       <form

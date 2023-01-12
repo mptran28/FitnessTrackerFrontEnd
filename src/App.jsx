@@ -69,7 +69,13 @@ function App() {
           />
           <Route
             path="/routines/:id"
-            element={<SingleRoutine routines={routines} activities={activities} setActivities={setActivities}/>}
+            element={
+              <SingleRoutine
+                routines={routines}
+                activities={activities}
+                setActivities={setActivities}
+              />
+            }
           />
           <Route
             path="/my_routines"
