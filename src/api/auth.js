@@ -66,15 +66,15 @@ export const getAllActivities = async () => {
       },
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const createNewActivity = async (token, name, description) => {
+export const createNewActivity = async ( name, description) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${baseUrl}/routines`, {
       method: "POST",
       headers: {
@@ -191,10 +191,17 @@ export const getUserRoutines = async (username) => {
 };
 
 export const updateRoutine = async (routineId, name, goal, isPublic) => {
-  console.log("updatateRoutine", routineId)
+  console.log("this is name", name);
+  console.log("this is goal", goal);
+  console.log("this is isPublic", isPublic);
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${baseUrl}/routines/${routineId}`, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name,
         goal,
@@ -202,6 +209,7 @@ export const updateRoutine = async (routineId, name, goal, isPublic) => {
       }),
     });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -231,6 +239,7 @@ export const attachActivityToRoutine = async (
   count,
   duration
 ) => {
+  console.log("attachActivity", routineId, activityId, count, duration)
   try {
     const response = await fetch(
       `${baseUrl}/routines/${routineId}/activities`,

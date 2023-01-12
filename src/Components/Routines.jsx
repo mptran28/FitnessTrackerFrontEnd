@@ -2,7 +2,6 @@ import React from "react";
 import "./Routines.css";
 const Routines = ({ routines }) => {
   console.log(routines);
-
   return (
     <>
       <h1>Routines</h1>
