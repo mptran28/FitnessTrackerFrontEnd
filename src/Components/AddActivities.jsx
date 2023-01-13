@@ -5,7 +5,7 @@ import { attachActivityToRoutine, getAllActivities } from "../api/auth";
 const AddActivities = ({ routine }) => {
   const routineId = routine.id;
   const [activities, setActivities] = useState([]);
-  const [activity, setActivity] = useState([]);
+  const [activityId, setActivityId] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const navigate = useNavigate;
@@ -32,9 +32,10 @@ const AddActivities = ({ routine }) => {
         onSubmit={async (event) => {
           try {
             event.preventDefault();
+            console.log(activityId);
             const addActivities = await attachActivityToRoutine({
               routineId,
-              //   activityId,
+              activityId,
               count,
               duration,
             });
@@ -45,7 +46,9 @@ const AddActivities = ({ routine }) => {
         }}
       >
         <label>Choose an Activity: </label>
-        <select onChange={(event) => setActivity(event.target.value)}>
+        <select
+          onChange={(event) => setActivityId(parseInt(event.target.value))}
+        >
           {activitiesToMap}
         </select>
         <label htmlFor="count">Count</label>

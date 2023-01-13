@@ -21,7 +21,7 @@ const EditRoutine = ({ routine, routines, setRoutines }) => {
               goal,
               isPublic
             );
-            const routinesToFilter = routines.filter((routine) => {
+            const routinesToFilter = routines?.filter((routine) => {
               return routineId !== routine.id;
             })
             console.log("filterRoutine: ", routinesToFilter)
