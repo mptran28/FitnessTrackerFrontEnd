@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { attachActivityToRoutine, getAllActivities } from "../api/auth";
+import { attachActivityToRoutine, getAllRoutines } from "../api/auth";
 
-const AddActivities = ({ routine }) => {
+const AddActivities = ({ routine, setRoutine, routines, activities }) => {
   const routineId = routine.id;
-  const [activities, setActivities] = useState([]);
   const [activityId, setActivityId] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-  const navigate = useNavigate;
-
-  useEffect(() => {
-    const getActivities = async () => {
-      const response = await getAllActivities();
-      setActivities(response);
-    };
-    getActivities();
-  }, []);
+  const navigate = useNavigate();
 
   let activitiesToMap = activities?.map((a, index) => {
     return (
@@ -39,7 +30,12 @@ const AddActivities = ({ routine }) => {
               count,
               duration,
             });
-            return addActivities;
+            
+            const routineToFilter = routines?.filter((routine) => {
+              return addActivities.routineId === routine.id;
+            });
+            setRoutine(routineToFilter[0]);
+            navigate('/my_routines');
           } catch (error) {
             console.error(error);
           }

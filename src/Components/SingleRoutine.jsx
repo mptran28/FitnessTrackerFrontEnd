@@ -11,6 +11,7 @@ const SingleRoutine = ({
   activities,
   setActivities,
 }) => {
+  const [routineActivities, setRoutineActivities] = useState([]);
   const [editRoutine, setEditRoutine] = useState(false);
   const [addActivity, setAddActivity] = useState(false);
   const [editRoutineActivity, setEditRoutineActivity] = useState(false);
@@ -32,10 +33,10 @@ const SingleRoutine = ({
   const handleDelete = async (routineActivityId) => {
     const response = await deleteRoutineActivity(routineActivityId);
     if (response) {
-      const newActivities = activities.filter(
-        (activity) => activity.id !== routineActivityId
+      const newRoutineActivity = routineActivities.filter(
+        (routineActivity) => routineActivity.id !== routineActivityId
       );
-      setActivities(newActivities);
+      setActivities(newRoutineActivity);
     }
   };
 
@@ -45,7 +46,7 @@ const SingleRoutine = ({
       <div className="routines" key={routine.id}>
         <h2>{routine.name}</h2>
         <h2>{routine.goal}</h2>
-        Activities :
+        <h3>Activities: </h3>
         {routine.activities
           ? routine.activities.map((activity, index) => {
               return (
@@ -61,6 +62,7 @@ const SingleRoutine = ({
                     <button
                       onClick={() => {
                         setEditRoutineActivity(!editRoutineActivity);
+                        navigate(`/my_routines`)
                       }}
                     >
                       Edit Routine Activity
@@ -79,14 +81,14 @@ const SingleRoutine = ({
             })
           : null}
         {addActivity ? (
-          <AddActivities routine={routine} />
+          <AddActivities routine={routine} setRoutine={setRoutine} routines={routines} setRoutines={setRoutines} activities={activities} setActivities={setActivities}/>
         ) : (
           <button
             onClick={() => {
               setAddActivity(!addActivity);
             }}
           >
-            Activities
+            Add Activitiy
           </button>
         )}
         {editRoutine ? (

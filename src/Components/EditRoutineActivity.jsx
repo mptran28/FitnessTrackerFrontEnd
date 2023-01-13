@@ -44,7 +44,7 @@ const EditRoutineActivity = ({ routine, routineActivity }) => {
           min="0"
           onChange={(event) => setDuration(parseInt(event.target.value))}
         ></input>
-        <button type="submit">Add Activity to </button>
+        <button type="submit">Edit Activity</button>
       </form>
     </div>
   );
