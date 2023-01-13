@@ -20,7 +20,7 @@ const AddActivities = ({ routine }) => {
 
   let activitiesToMap = activities?.map((a, index) => {
     return (
-      <option value={activity} key={index}>
+      <option value={a.id} key={index}>
         {a.name}
       </option>
     );
