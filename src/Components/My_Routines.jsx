@@ -17,6 +17,7 @@ const My_Routines = ({ user, routines, setRoutines }) => {
   };
   let routinesToMap = routines.map((routine, index) => {
     if (user.id === routine.creatorId) {
+      console.log(routine);
       return (
         <div className="routines" key={index}>
           <h2>{routine.name}</h2>

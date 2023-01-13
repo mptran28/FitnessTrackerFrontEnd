@@ -86,9 +86,9 @@ export const createNewActivity = async (name, description) => {
         description,
       }),
     });
-    console.log("createActivities: ",name,description)
+    console.log("createActivities: ", name, description);
     const data = await response.json();
-    console.log("dataCreateActivity",data)
+    console.log("dataCreateActivity", data);
     return data;
   } catch (error) {
     console.error(error);
@@ -235,23 +235,28 @@ export const deleteRoutine = async (routineId) => {
   }
 };
 
-export const attachActivityToRoutine = async (
+export const attachActivityToRoutine = async ({
   routineId,
   activityId,
   count,
   duration,
-) => {
+}) => {
   console.log("attachActivity", routineId, activityId, count, duration);
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${baseUrl}/routines/${routineId}/activities`,
       {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           activityId,
           count,
           duration,
-      }),
+        }),
       }
     );
     console.log(response.body);
@@ -289,6 +294,8 @@ export const updateRoutineActivity = async (
 };
 
 export const deleteRoutineActivity = async (routineActivityId) => {
+  console.log(routineActivityId);
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${baseUrl}/routine_activities/${routineActivityId}`,
@@ -301,6 +308,7 @@ export const deleteRoutineActivity = async (routineActivityId) => {
       }
     );
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
