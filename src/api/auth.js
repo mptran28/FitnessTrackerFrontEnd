@@ -275,11 +275,17 @@ export const updateRoutineActivity = async (
   count,
   duration
 ) => {
+  console.log(routineActivityId, count, duration);
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       `${baseUrl}/routine_activities/${routineActivityId}`,
       {
         method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           count,
           duration,
@@ -287,6 +293,7 @@ export const updateRoutineActivity = async (
       }
     );
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

@@ -1,32 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { updateRoutineActivity } from "../api/auth";
+import {
+  updateRoutineActivity,
+  getAllActivities,
+  getAllRoutines,
+} from "../api/auth";
 
-const EditRoutineActivity = ({ routine, routineActivity }) => {
+const EditRoutineActivity = ({
+  routine,
+  routineActivity,
+  routines,
+  setRoutines,
+  activity,
+  setRoutine,
+}) => {
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
+  const [activities, setActivities] = useState([]);
+  const routineActivityId = activity.routineActivityId;
+  const routineId = routine.id;
+  // const navigate = useNavigate();
 
   return (
     <div>
       <form
-      //  onSubmit={async (event) => {
-      //     try {
-      //       event.preventDefault();
-      //       const newRoutineActivity = await updateRoutineActivity(
-      //         routineId,
-      //         count,
-      //         duration
-      //       );
-      //       const routinesActivitiesToFilter = routineAcitivities.filter((routine) => {
-      //         return routineId !== routine.id;
-      //       })
-      //       console.log("filterRoutine: ", routinesToFilter)
-      //       setRoutines ([newRoutine, ...routinesToFilter]);
-      //       navigate('/my_routines');
-      //     } catch (error) {
-      //       console.error(error);
-      //     }
-      //   }}
+        onSubmit={async (event) => {
+          try {
+            event.preventDefault();
+            const updatedRoutineActivity = await updateRoutineActivity(
+              routineActivityId,
+              count,
+              duration
+            );
+            const routines = await getAllRoutines();
+            const routineToFilter = routines?.filter((routine) => {
+              return updatedRoutineActivity.routineId === routine.id;
+            });
+            console.log(routineToFilter);
+            setRoutine(routineToFilter[0]);
+          } catch (error) {
+            console.error(error);
+          }
+        }}
       >
         <label htmlFor="count">Count</label>
         <input
