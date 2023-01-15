@@ -7,7 +7,7 @@ const NewRoutine = ({ routines, setRoutines }) => {
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const navigate = useNavigate();
-  
+
   return (
     <div>
       <form

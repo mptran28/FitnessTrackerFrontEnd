@@ -13,7 +13,8 @@ const Routines = ({ routines }) => {
                   <h2>Name : {routine.name}</h2>
                   <h3>Creator : {routine.creatorName}</h3>
                   <h3>Goal : {routine.goal}</h3>
-                  <h3>Activities :
+                  <h3>
+                    Activities :
                     {routine.activities
                       ? routine.activities.map((activity, index) => {
                           return (

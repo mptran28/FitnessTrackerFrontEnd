@@ -14,7 +14,7 @@ const Activities = ({ activities, setActivities }) => {
   });
   return (
     <>
-      <NewActivity activities={activities} setActivities={setActivities}/>
+      <NewActivity activities={activities} setActivities={setActivities} />
       <h1>Activities</h1>
       <div>{activitiesToMap}</div>
     </>

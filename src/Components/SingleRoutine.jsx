@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { deleteRoutineActivity } from "../api/auth";
+import { deleteRoutineActivity, getAllRoutines } from "../api/auth";
 import EditRoutine from "./EditRoutine";
 import AddActivities from "./AddActivities";
 import EditRoutineActivity from "./EditRoutineActivity";
@@ -11,7 +11,6 @@ const SingleRoutine = ({
   activities,
   setActivities,
 }) => {
-  const [routineActivities, setRoutineActivities] = useState([]);
   const [editRoutine, setEditRoutine] = useState(false);
   const [addActivity, setAddActivity] = useState(false);
   const [editRoutineActivity, setEditRoutineActivity] = useState(false);
@@ -30,13 +29,17 @@ const SingleRoutine = ({
     setRoutine(routine);
   }, [id]);
 
+  console.log(routine);
+
   const handleDelete = async (routineActivityId) => {
     const response = await deleteRoutineActivity(routineActivityId);
     if (response) {
-      const newRoutineActivity = routineActivities.filter(
-        (routineActivity) => routineActivity.id !== routineActivityId
-      );
-      setActivities(newRoutineActivity);
+      const routines = await getAllRoutines();
+      console.log("this is response", response);
+      const routineToFilter = routines?.filter((routine) => {
+        return response.routineId === routine.id;
+      });
+      setRoutine(routineToFilter);
     }
   };
 
@@ -46,7 +49,7 @@ const SingleRoutine = ({
       <div className="routines" key={routine.id}>
         <h2>{routine.name}</h2>
         <h2>{routine.goal}</h2>
-        <h3>Activities: </h3>
+        <h3>Activities :</h3>
         {routine.activities
           ? routine.activities.map((activity, index) => {
               return (
@@ -57,12 +60,19 @@ const SingleRoutine = ({
                     Count/Duration : {activity.count}/{activity.duration}
                   </h5>
                   {editRoutineActivity ? (
-                    <EditRoutineActivity routine={routine} />
+                    <EditRoutineActivity
+                      routine={routine}
+                      routines={routines}
+                      setRoutines={setRoutines}
+                      setRoutine={setRoutine}
+                      activity={activity}
+                      activities={activities}
+                      setActivities={setActivities}
+                    />
                   ) : (
                     <button
                       onClick={() => {
                         setEditRoutineActivity(!editRoutineActivity);
-                        navigate(`/my_routines`)
                       }}
                     >
                       Edit Routine Activity
@@ -72,7 +82,7 @@ const SingleRoutine = ({
                   <button
                     type="submit"
                     className="delete-button"
-                    onClick={() => handleDelete(activity.id)}
+                    onClick={() => handleDelete(activity.routineActivityId)}
                   >
                     Delete Activity
                   </button>
@@ -81,14 +91,20 @@ const SingleRoutine = ({
             })
           : null}
         {addActivity ? (
-          <AddActivities routine={routine} setRoutine={setRoutine} routines={routines} setRoutines={setRoutines} activities={activities} setActivities={setActivities}/>
+          <AddActivities
+            routine={routine}
+            routines={routines}
+            setRoutines={setRoutines}
+            setRoutine={setRoutine}
+            activities={activities}
+          />
         ) : (
           <button
             onClick={() => {
               setAddActivity(!addActivity);
             }}
           >
-            Add Activitiy
+            Add Activity
           </button>
         )}
         {editRoutine ? (

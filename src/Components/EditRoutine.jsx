@@ -8,7 +8,7 @@ const EditRoutine = ({ routine, routines, setRoutines }) => {
   const [isPublic, setIsPublic] = useState(false);
   const navigate = useNavigate();
   const routineId = routine.id;
- 
+
   return (
     <div>
       <form
@@ -21,12 +21,12 @@ const EditRoutine = ({ routine, routines, setRoutines }) => {
               goal,
               isPublic
             );
-            const routinesToFilter = routines?.filter((routine) => {
+            const routinesToFilter = routines.filter((routine) => {
               return routineId !== routine.id;
-            })
-            console.log("filterRoutine: ", routinesToFilter)
-            setRoutines ([newRoutine, ...routinesToFilter]);
-            navigate('/my_routines');
+            });
+            console.log("filterRoutine: ", routinesToFilter);
+            setRoutines([newRoutine, ...routinesToFilter]);
+            navigate("/my_routines");
           } catch (error) {
             console.error(error);
           }
