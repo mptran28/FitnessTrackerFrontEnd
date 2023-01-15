@@ -30,7 +30,6 @@ const AddActivities = ({ routine, setRoutine, routines, activities }) => {
               count,
               duration,
             });
-            
             const routineToFilter = routines?.filter((routine) => {
               return addActivities.routineId === routine.id;
             });
